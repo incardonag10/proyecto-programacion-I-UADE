@@ -69,7 +69,7 @@ while blackjack:
         print(nueva_carta)
         if total_jugador < 11 and nueva_carta == 1:
             nueva_carta = int(input("Salio un as, prefiere que valga 1 o 11? "))
-            while nueva_carta != 1 or nueva_carta != 11:
+            while nueva_carta != 1 and nueva_carta != 11:
                 nueva_carta = int(input("Numero no valido, 1 o 11: "))
         total_jugador += nueva_carta
         print(f"Total: {total_jugador}")
