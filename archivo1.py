@@ -1,5 +1,5 @@
 from ruleta import jugar_ruleta
-
+from blackjack import jugar_blackjack
 import os
 
 
@@ -21,7 +21,8 @@ def menu():
 
         if opcion == "1":
             jugar_ruleta()
-        
+        elif opcion == "2":
+            jugar_blackjack()
         elif opcion == "0":
             print("Gracias por jugar!")
             break
@@ -30,4 +31,4 @@ def menu():
 
 
 if __name__ == "__main__":
-    menu()
+    menu() 
