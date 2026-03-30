@@ -36,6 +36,7 @@ def mostrar_menu():
     print("5. Docenas (1-12 / 13-24 / 25-36) (x3)")
     print("6. Columnas (1 / 2 / 3) (x3)")
     print("0. Girar ruleta")
+    print("9. Volver al menú principal")
 
 
 def pedir_eleccion(opcion):
@@ -144,11 +145,16 @@ def jugar_ruleta():
             mostrar_menu()
 
             try:
-                opcion = int(input("\nElegí una opción (0 para girar): "))
+                opcion = int(input("\nElegí una opción (0 para girar, 9 para salir): "))
             except ValueError:
                 print("Error: Ingresá un número válido")
                 time.sleep(1.5)
                 continue
+
+            if opcion == 9:
+                print("Volviendo al menú principal...")
+                time.sleep(1)
+                return
 
             if opcion == 0:
                 if len(apuestas) == 0:
