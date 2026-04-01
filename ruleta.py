@@ -80,7 +80,6 @@ def pedir_eleccion(opcion):
 
 
 def calcular_ganancia(opcion, eleccion, numero, color, apuesta):
-    # número exacto
     if opcion == 1:
         if eleccion == numero:
             if numero == 0:
@@ -88,26 +87,22 @@ def calcular_ganancia(opcion, eleccion, numero, color, apuesta):
             else:
                 return apuesta * 35
 
-    # color
     elif opcion == 2:
         if eleccion == color:
             return apuesta
 
-    # par e impar
     elif opcion == 3 and numero != 0:
         if eleccion == "par" and numero % 2 == 0:
             return apuesta
         elif eleccion == "impar" and numero % 2 != 0:
             return apuesta
 
-    # bajo y alto
     elif opcion == 4:
         if eleccion == "bajo" and 1 <= numero <= 18:
             return apuesta
         elif eleccion == "alto" and 19 <= numero <= 36:
             return apuesta
 
-    # docenas
     elif opcion == 5:
         if eleccion == 1 and 1 <= numero <= 12:
             return apuesta * 2
@@ -116,7 +111,6 @@ def calcular_ganancia(opcion, eleccion, numero, color, apuesta):
         elif eleccion == 3 and 25 <= numero <= 36:
             return apuesta * 2
 
-    # columnas
     elif opcion == 6 and numero != 0:
         if eleccion == 1 and numero % 3 == 1:
             return apuesta * 2
@@ -130,12 +124,11 @@ def calcular_ganancia(opcion, eleccion, numero, color, apuesta):
 
 # programa
 
-def jugar_ruleta():
-    saldo = 1000
-
+def jugar_ruleta(nombre, apellido, saldo):
     while saldo > 0:
         limpiar_pantalla()
         print("== RULETA ==")
+        print(f"Jugador: {nombre} {apellido}")
         print(f"Saldo: {saldo}")
 
         apuestas = []
@@ -154,7 +147,7 @@ def jugar_ruleta():
             if opcion == 9:
                 print("Volviendo al menú principal...")
                 time.sleep(1)
-                return
+                return saldo
 
             if opcion == 0:
                 if len(apuestas) == 0:
@@ -238,10 +231,12 @@ def jugar_ruleta():
     print("\nTe quedaste sin dinero.")
     print("\nGracias por jugar a la ruleta!")
 
-    input("\nPresioná ENTER para salir...")
+    input("\nPresioná ENTER para volver al menú...")
+
+    return saldo
 
 
 # ejecucion
 
 if __name__ == "__main__":
-    jugar_ruleta()
+    jugar_ruleta("Invitado", "Local", 1000)
