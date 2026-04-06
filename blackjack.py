@@ -12,7 +12,7 @@ def jugar_blackjack():
 
     #al momento de sacar un a carta, chequea si ya esta en la ultima carta para mezclarlo de vuelta y volver el prinvipio
     def sacar_carta():
-        global mazo, pos
+        nonlocal mazo, pos
 
         if pos >= len(mazo):
             mazo = crear_mazo()
@@ -68,7 +68,7 @@ def jugar_blackjack():
         #una vez se elije si sacar o no otra carta, se crea un ciclo en el cual si se pasa de 21 se corta
         while decision == 1 and total_jugador < 22:
             nueva_carta = sacar_carta()
-            print(nueva_carta)
+            print(f"+ {nueva_carta}")
             if total_jugador < 11 and nueva_carta == 1:
                 nueva_carta = int(input("Salio un as, prefiere que valga 1 o 11? "))
                 while nueva_carta != 1 and nueva_carta != 11:
