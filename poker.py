@@ -7,7 +7,7 @@ def generar_cartas():
 
 def repartir_cartas(cartas, cantidad):
     random.shuffle(cartas)
-    return [cartas.pop() for i in range(cantidad)]
+    return [cartas.pop() for i in range(cantidad)]  
 
 def cartas_en_la_mesa(cartas):
     random.shuffle(cartas)
@@ -24,10 +24,10 @@ def cartas_en_la_mesa_ronda2(cartas, cartas_en_mesa):
     return cartas_en_mesa
 
 def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
-    todas_cartas = cartas_en_mesa + cartas_jugador
-    valores = [carta[0] for carta in todas_cartas]
-    palos = [carta[1] for carta in todas_cartas]
-    orden = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+    todas_cartas_jugador = cartas_en_mesa + cartas_jugador
+    valores = [carta[0] for carta in todas_cartas_jugador]
+    palos = [carta[1] for carta in todas_cartas_jugador]
+    orden = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
     max_rep = 0
     segunda_rep = 0
@@ -61,9 +61,8 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
         else:
             consecutivos = 1
 
-    if es_escalera and es_color:
-        return "Escalera de color"
-    elif max_rep == 4:
+ 
+    if max_rep == 4:
         return "Poker"
     elif max_rep == 3 and segunda_rep == 2:
         return "Full House"
@@ -72,7 +71,7 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
     elif es_escalera:
         return "Escalera"
     elif max_rep == 3:
-        return "Trio"
+        return "Triple"
     elif max_rep == 2 and segunda_rep == 2:
         return "Doble pareja"
     elif max_rep == 2:
@@ -80,10 +79,27 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
     else:
         return "Carta alta"
 
+def desempate (cartas_en_mesa, cartas_jugador, cartas_bot):
+    todas_las_cartas_jugador = cartas_en_mesa + cartas_jugador
+    todas_las_cartas_bot = cartas_en_mesa + cartas_bot
+    carta_mayor_jugador = max(todas_las_cartas_jugador)
+    carta_mayor_bot = max(todas_las_cartas_bot)
+    if carta_mayor_jugador > carta_mayor_bot:
+        ventaja = 1
+    elif carta_mayor_jugador < carta_mayor_bot:
+        ventaja = 2
+    else:
+        ventaja = 0
+    return ventaja
+
+ 
+
+
 
 cartas = generar_cartas()
 cartas_jugador = repartir_cartas(cartas, 2)
 cartas_en_mesa = cartas_en_la_mesa(cartas)
+cartas_bot = repartir_cartas(cartas, 2)
 
 print("---------------------------------------------------------------------" )
 print(f"            Cartas del jugador: {cartas_jugador}")
@@ -101,8 +117,11 @@ print("---------------------------------------------------------------------" )
 cartas_en_la_mesa_ronda2(cartas, cartas_en_mesa)
 print(f"            Mesa ronda 2: {cartas_en_mesa}")
 
-
-
 print("---------------------------------------------------------------------" )
-print(f"            Clasificación: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
+
+print(f"El otro jugador tira sus cartas y tiene:\n\n{cartas_bot}")
+print("---------------------------------------------------------------------" )
+print(f"            Clasificacion rival: {clasificacion_cartas(cartas_en_mesa, cartas_bot)}")
+print("---------------------------------------------------------------------" )
+print(f"            Clasificación tuya: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
 print("---------------------------------------------------------------------" )
