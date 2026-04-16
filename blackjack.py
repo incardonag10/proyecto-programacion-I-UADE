@@ -12,7 +12,7 @@ def jugar_blackjack():
 
     #al momento de sacar un a carta, chequea si ya esta en la ultima carta para mezclarlo de vuelta y volver el prinvipio
     def sacar_carta():
-        global mazo, pos
+        nonlocal mazo, pos
 
         if pos >= len(mazo):
             mazo = crear_mazo()
