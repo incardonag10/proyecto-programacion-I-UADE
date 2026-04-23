@@ -1,28 +1,34 @@
 import random
-
+#Genera cartas en una lista de tuplas entre la lista de valor y la lista de palos
 def generar_cartas():
     palos = ['corazones', 'treboles', 'diamantes', 'picas']
     valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
     return [(valor, palo) for palo in palos for valor in valores]
 
+#mezcla las cartas, las reparte y las saca de la lista con el pop
 def repartir_cartas(cartas, cantidad):
     random.shuffle(cartas)
     return [cartas.pop() for i in range(cantidad)]  
 
+#mezcla las cartas y saca 3 para la mesa
 def cartas_en_la_mesa(cartas):
     random.shuffle(cartas)
     return [cartas.pop() for i in range(3)]
 
+#mezcla las cartas, saca 1 y las suma a las otras 3 de la mesa
 def cartas_en_la_mesa_ronda1(cartas, cartas_en_mesa):
     random.shuffle(cartas)
     cartas_en_mesa.extend([cartas.pop() for i in range(1)])
     return cartas_en_mesa
 
+#mezcla las cartas, saca 1 y las suma a las otras 4 de la mesa
 def cartas_en_la_mesa_ronda2(cartas, cartas_en_mesa):
     random.shuffle(cartas)
     cartas_en_mesa.extend([cartas.pop() for i in range(1)])
     return cartas_en_mesa
 
+
+#pone el orden de las cartas y dependiendo de cuantas veces se repite cada valor y/o cada palo se clasifica
 def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
     todas_cartas_jugador = cartas_en_mesa + cartas_jugador
     valores = [carta[0] for carta in todas_cartas_jugador]
@@ -79,6 +85,7 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
     else:
         return "Carta alta"
 
+#Toma la cartas de la mesa y los jugadores para ver cual es la mas alta en caso de empate se usa esta funcion 
 def desempate(cartas_en_mesa, cartas_jugador, cartas_bot):
     todas_las_cartas_jugador = cartas_en_mesa + cartas_jugador
     todas_las_cartas_bot = cartas_en_mesa + cartas_bot
@@ -98,6 +105,8 @@ def desempate(cartas_en_mesa, cartas_jugador, cartas_bot):
     else:
         return "            Empate por la carta mas alta"
     
+
+#Ponemos una lista del orden de clasificacion y segun las posiciones de ese orden va a dar si es mayor o menor q las otras
 def ganador(cartas_en_mesa, cartas_jugador, cartas_bot):
     clasificacion_jugador = clasificacion_cartas(cartas_en_mesa, cartas_jugador)
     clasificacion_bot = clasificacion_cartas(cartas_en_mesa, cartas_bot)
@@ -109,6 +118,9 @@ def ganador(cartas_en_mesa, cartas_jugador, cartas_bot):
         return "            Gana el bot"
     else:
         return desempate(cartas_en_mesa, cartas_jugador, cartas_bot)
+
+
+
 
 
 
@@ -142,3 +154,4 @@ print("---------------------------------------------------------------------" )
 print(f"            Clasificación tuya: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
 print("---------------------------------------------------------------------" )
 print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot))
+
