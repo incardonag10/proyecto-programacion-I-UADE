@@ -79,18 +79,26 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
     else:
         return "Carta alta"
 
-def desempate (cartas_en_mesa, cartas_jugador, cartas_bot):
+def desempate(cartas_en_mesa, cartas_jugador, cartas_bot):
     todas_las_cartas_jugador = cartas_en_mesa + cartas_jugador
     todas_las_cartas_bot = cartas_en_mesa + cartas_bot
     carta_mayor_jugador = max(todas_las_cartas_jugador)
     carta_mayor_bot = max(todas_las_cartas_bot)
     if carta_mayor_jugador > carta_mayor_bot:
-        ventaja = 1
+        desempate=1
     elif carta_mayor_jugador < carta_mayor_bot:
-        ventaja = 2
+        desempate=2
     else:
-        ventaja = 0
-    return ventaja
+        desempate=0
+
+    if desempate == 1:
+        return "Gana el jugador"
+    elif desempate == 2:
+        return "Gana el bot"
+    else:
+        return "Empate"
+    
+
 
  
 
@@ -125,3 +133,4 @@ print(f"            Clasificacion rival: {clasificacion_cartas(cartas_en_mesa, c
 print("---------------------------------------------------------------------" )
 print(f"            Clasificación tuya: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
 print("---------------------------------------------------------------------" )
+print(f"            {desempate(cartas_en_mesa, cartas_jugador, cartas_bot)}")
