@@ -1,4 +1,15 @@
 import random
+
+
+def empezar_juego():
+    banco = int(input("Ingrese monto a depositar en el banco: $"))
+    arranque = input("Desea jugar Snicker´s poker? (si o no): ")
+    if arranque == "si":
+        apuesta = float(input("Elija monto a apostar: $"))
+    while apuesta > banco:
+            print(f"No hay fondos suficientes, tenes ${banco} en el banco")
+            apuesta = float(input("Elija monto a apostar: $"))
+        
 #Genera cartas en una lista de tuplas entre la lista de valor y la lista de palos
 def generar_cartas():
     palos = ['corazones', 'treboles', 'diamantes', 'picas']
@@ -119,7 +130,7 @@ cartas = generar_cartas()
 cartas_jugador = repartir_cartas(cartas, 2)
 cartas_en_mesa = cartas_en_la_mesa(cartas)
 cartas_bot = repartir_cartas(cartas, 2)
-
+empezar_juego()
 print("---------------------------------------------------------------------" )
 print(f"            Cartas del jugador: {cartas_jugador}")
 print(f"            Mesa inicial: {cartas_en_mesa}")
