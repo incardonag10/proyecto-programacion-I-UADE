@@ -15,7 +15,7 @@ def cartas_en_la_mesa(cartas):
     random.shuffle(cartas)
     return [cartas.pop() for i in range(3)]
 
-#mezcla las cartas, saca 1 y las suma a las otras 3 de la mesa
+#mezcla las cartas, saca 1 y las suma a las otras de la mesa
 def cartas_en_la_mesa_ronda(cartas, cartas_en_mesa):
     random.shuffle(cartas)
     cartas_en_mesa.extend([cartas.pop() for i in range(1)])
@@ -43,22 +43,20 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
         if palos.count(palo) >= 5:
             es_color = True
 
-    vistos = []
-    indices = []
-    for valor in valores:
-        if valor not in vistos:
-            vistos.append(valor)
-            indices.append(orden.index(valor))
-    indices.sort()
     es_escalera = False
+    todas_cartas_jugador_ordenadas = []
+    for carta in orden:
+        if carta in valores:
+            todas_cartas_jugador_ordenadas.append(carta)
     consecutivos = 1
-    for i in range(len(indices) - 1):
-        if indices[i+1] - indices[i] == 1:
+    for i in range(len(todas_cartas_jugador_ordenadas) - 1):
+        if orden.index(todas_cartas_jugador_ordenadas[i+1]) - orden.index(todas_cartas_jugador_ordenadas[i]) == 1:
             consecutivos += 1
             if consecutivos >= 5:
                 es_escalera = True
         else:
             consecutivos = 1
+            es_escalera = False
 
  
     if max_rep == 4:
