@@ -1,13 +1,57 @@
 import random
 
-
 banco = int(input("Ingrese monto a depositar en el banco: $"))
 arranque = input("Desea jugar Snicker´s poker? (si o no): ")
-if arranque == "si":
-        apuesta = float(input("Elija monto a apostar: $"))
+apuesta = int(input("Elija monto a apostar: $"))
 while apuesta > banco:
-            print(f"No hay fondos suficientes, tenes ${banco} en el banco")
-            apuesta = float(input("Elija monto a apostar: $"))
+    print(f"No hay fondos suficientes, tenes ${banco} en el banco")
+    apuesta = int(input("Elija monto a apostar: $"))
+
+
+
+def main():
+    cartas = generar_cartas()
+    cartas_jugador = repartir_cartas(cartas, 2)
+    cartas_en_mesa = cartas_en_la_mesa(cartas)
+    cartas_bot = repartir_cartas(cartas, 2)
+
+    print("---------------------------------------------------------------------" )
+    print(f"            Cartas del jugador: {cartas_jugador}")
+    print(f"            Mesa inicial: {cartas_en_mesa}")
+
+
+
+    print("---------------------------------------------------------------------" )
+    cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
+    print(f"            Mesa ronda 1: {cartas_en_mesa}")
+
+
+
+    print("---------------------------------------------------------------------" )
+    cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
+    print(f"            Mesa ronda 2: {cartas_en_mesa}")
+
+    print("---------------------------------------------------------------------" )
+
+    print(f"El otro jugador tira sus cartas y tiene:\n\n{cartas_bot}")
+    print("---------------------------------------------------------------------" )
+    print(f"            Clasificacion rival: {clasificacion_cartas(cartas_en_mesa, cartas_bot)}")
+    print("---------------------------------------------------------------------" )
+    print(f"            Clasificación tuya: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
+    print("---------------------------------------------------------------------" )
+    print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta))
+    print("---------------------------------------------------------------------" )
+    print(f"Fondos restantes en el banco: ${banco}")
+    print("---------------------------------------------------------------------" )
+    Devuelta=input("Desea jugar otra partida? (si o no):  ")
+    if Devuelta == "si":
+        main()
+
+
+
+
+
+
         
 #Genera cartas en una lista de tuplas entre la lista de valor y la lista de palos
 def generar_cartas():
@@ -87,7 +131,7 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
         return "Carta alta"
 
 #Toma la cartas de la mesa y los jugadores para ver cual es la mas alta en caso de empate se usa esta funcion 
-def desempate(cartas_en_mesa, cartas_jugador, cartas_bot):
+def desempate(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta):
     todas_las_cartas_jugador = cartas_en_mesa + cartas_jugador
     todas_las_cartas_bot = cartas_en_mesa + cartas_bot
     carta_mayor_jugador = max(todas_las_cartas_jugador)
@@ -100,65 +144,30 @@ def desempate(cartas_en_mesa, cartas_jugador, cartas_bot):
         desempate=0
 
     if desempate == 1:
-        return "            Gana el jugador por la carta mas alta", banco + apuesta*2
+        banco = banco + apuesta*2
+        return "            Gana el jugador por la carta mas alta"
     elif desempate == 2:
-        return "            Gana el bot por la carta mas alta", banco - apuesta
+        banco = banco - apuesta
+        return "            Gana el bot por la carta mas alta"
     else:
         return "            Empate por la carta mas alta", banco
     
 
 #Ponemos una lista del orden de clasificacion y segun las posiciones de ese orden va a dar si es mayor o menor q las otras
-def ganador(cartas_en_mesa, cartas_jugador, cartas_bot):
+def ganador(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta):
     clasificacion_jugador = clasificacion_cartas(cartas_en_mesa, cartas_jugador)
     clasificacion_bot = clasificacion_cartas(cartas_en_mesa, cartas_bot)
 
     orden_clasificaciones = ["Carta alta", "Pareja", "Doble pareja", "Triple", "Escalera", "Color", "Full House", "Poker"]
     if orden_clasificaciones.index(clasificacion_jugador) > orden_clasificaciones.index(clasificacion_bot):
-        return "            Gana el jugador", banco + apuesta*2
+        banco = banco + apuesta*2
+        return "            Gana el jugador"
     elif orden_clasificaciones.index(clasificacion_jugador) < orden_clasificaciones.index(clasificacion_bot):
-        return "            Gana el bot", banco - apuesta
+        banco = banco - apuesta
+        return "            Gana el bot"
     else:
-        return desempate(cartas_en_mesa, cartas_jugador, cartas_bot)
+        return desempate(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta)
 
 
-
-
-
-
-
-cartas = generar_cartas()
-cartas_jugador = repartir_cartas(cartas, 2)
-cartas_en_mesa = cartas_en_la_mesa(cartas)
-cartas_bot = repartir_cartas(cartas, 2)
-
-print("---------------------------------------------------------------------" )
-print(f"            Cartas del jugador: {cartas_jugador}")
-print(f"            Mesa inicial: {cartas_en_mesa}")
-
-
-
-print("---------------------------------------------------------------------" )
-cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
-print(f"            Mesa ronda 1: {cartas_en_mesa}")
-
-
-
-print("---------------------------------------------------------------------" )
-cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
-print(f"            Mesa ronda 2: {cartas_en_mesa}")
-
-print("---------------------------------------------------------------------" )
-
-print(f"El otro jugador tira sus cartas y tiene:\n\n{cartas_bot}")
-print("---------------------------------------------------------------------" )
-print(f"            Clasificacion rival: {clasificacion_cartas(cartas_en_mesa, cartas_bot)}")
-print("---------------------------------------------------------------------" )
-print(f"            Clasificación tuya: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
-print("---------------------------------------------------------------------" )
-print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot))
-print("---------------------------------------------------------------------" )
-print(f"Fondos restantes en el banco: ${banco}")
-print("---------------------------------------------------------------------" )
-Devuelta=input("Desea jugar otra partida? (si o no):  ")
-
-
+if arranque == "si":
+    main()
