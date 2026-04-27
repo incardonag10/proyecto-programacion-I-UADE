@@ -1,12 +1,11 @@
 import random
 
 
-def empezar_juego():
-    banco = int(input("Ingrese monto a depositar en el banco: $"))
-    arranque = input("Desea jugar Snicker´s poker? (si o no): ")
-    if arranque == "si":
+banco = int(input("Ingrese monto a depositar en el banco: $"))
+arranque = input("Desea jugar Snicker´s poker? (si o no): ")
+if arranque == "si":
         apuesta = float(input("Elija monto a apostar: $"))
-    while apuesta > banco:
+while apuesta > banco:
             print(f"No hay fondos suficientes, tenes ${banco} en el banco")
             apuesta = float(input("Elija monto a apostar: $"))
         
@@ -101,11 +100,11 @@ def desempate(cartas_en_mesa, cartas_jugador, cartas_bot):
         desempate=0
 
     if desempate == 1:
-        return "            Gana el jugador por la carta mas alta"
+        return "            Gana el jugador por la carta mas alta", banco + apuesta*2
     elif desempate == 2:
-        return "            Gana el bot por la carta mas alta"
+        return "            Gana el bot por la carta mas alta", banco - apuesta
     else:
-        return "            Empate por la carta mas alta"
+        return "            Empate por la carta mas alta", banco
     
 
 #Ponemos una lista del orden de clasificacion y segun las posiciones de ese orden va a dar si es mayor o menor q las otras
@@ -115,11 +114,12 @@ def ganador(cartas_en_mesa, cartas_jugador, cartas_bot):
 
     orden_clasificaciones = ["Carta alta", "Pareja", "Doble pareja", "Triple", "Escalera", "Color", "Full House", "Poker"]
     if orden_clasificaciones.index(clasificacion_jugador) > orden_clasificaciones.index(clasificacion_bot):
-        return "            Gana el jugador"
+        return "            Gana el jugador", banco + apuesta*2
     elif orden_clasificaciones.index(clasificacion_jugador) < orden_clasificaciones.index(clasificacion_bot):
-        return "            Gana el bot"
+        return "            Gana el bot", banco - apuesta
     else:
         return desempate(cartas_en_mesa, cartas_jugador, cartas_bot)
+
 
 
 
@@ -130,7 +130,7 @@ cartas = generar_cartas()
 cartas_jugador = repartir_cartas(cartas, 2)
 cartas_en_mesa = cartas_en_la_mesa(cartas)
 cartas_bot = repartir_cartas(cartas, 2)
-empezar_juego()
+
 print("---------------------------------------------------------------------" )
 print(f"            Cartas del jugador: {cartas_jugador}")
 print(f"            Mesa inicial: {cartas_en_mesa}")
@@ -156,4 +156,9 @@ print("---------------------------------------------------------------------" )
 print(f"            Clasificación tuya: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
 print("---------------------------------------------------------------------" )
 print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot))
+print("---------------------------------------------------------------------" )
+print(f"Fondos restantes en el banco: ${banco}")
+print("---------------------------------------------------------------------" )
+Devuelta=input("Desea jugar otra partida? (si o no):  ")
+
 
