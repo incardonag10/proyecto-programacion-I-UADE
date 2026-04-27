@@ -16,17 +16,10 @@ def cartas_en_la_mesa(cartas):
     return [cartas.pop() for i in range(3)]
 
 #mezcla las cartas, saca 1 y las suma a las otras 3 de la mesa
-def cartas_en_la_mesa_ronda1(cartas, cartas_en_mesa):
+def cartas_en_la_mesa_ronda(cartas, cartas_en_mesa):
     random.shuffle(cartas)
     cartas_en_mesa.extend([cartas.pop() for i in range(1)])
     return cartas_en_mesa
-
-#mezcla las cartas, saca 1 y las suma a las otras 4 de la mesa
-def cartas_en_la_mesa_ronda2(cartas, cartas_en_mesa):
-    random.shuffle(cartas)
-    cartas_en_mesa.extend([cartas.pop() for i in range(1)])
-    return cartas_en_mesa
-
 
 #pone el orden de las cartas y dependiendo de cuantas veces se repite cada valor y/o cada palo se clasifica
 def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
@@ -136,13 +129,13 @@ print(f"            Mesa inicial: {cartas_en_mesa}")
 
 
 print("---------------------------------------------------------------------" )
-cartas_en_la_mesa_ronda1(cartas, cartas_en_mesa)
+cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
 print(f"            Mesa ronda 1: {cartas_en_mesa}")
 
 
 
 print("---------------------------------------------------------------------" )
-cartas_en_la_mesa_ronda2(cartas, cartas_en_mesa)
+cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
 print(f"            Mesa ronda 2: {cartas_en_mesa}")
 
 print("---------------------------------------------------------------------" )
