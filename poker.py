@@ -1,15 +1,18 @@
 import random
 
-banco = int(input("Ingrese monto a depositar en el banco: $"))
+estado = {"banco": float(input("Ingrese monto a depositar en el banco: $"))}
+
+
 arranque = input("Desea jugar Snicker´s poker? (si o no): ")
-apuesta = int(input("Elija monto a apostar: $"))
-while apuesta > banco:
-    print(f"No hay fondos suficientes, tenes ${banco} en el banco")
-    apuesta = int(input("Elija monto a apostar: $"))
-
-
 
 def main():
+    apuesta = float(input("Elija monto a apostar: $"))
+    while apuesta > estado["banco"]:
+        print(f"No hay fondos suficientes, tenes ${estado['banco']} en el banco")
+        apuesta = float(input("Elija monto a apostar: $"))
+    estado["banco"] -= apuesta
+
+
     cartas = generar_cartas()
     cartas_jugador = repartir_cartas(cartas, 2)
     cartas_en_mesa = cartas_en_la_mesa(cartas)
@@ -39,13 +42,20 @@ def main():
     print("---------------------------------------------------------------------" )
     print(f"            Clasificación tuya: {clasificacion_cartas(cartas_en_mesa, cartas_jugador)}")
     print("---------------------------------------------------------------------" )
-    print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta))
+    print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta))
     print("---------------------------------------------------------------------" )
-    print(f"Fondos restantes en el banco: ${banco}")
     print("---------------------------------------------------------------------" )
     Devuelta=input("Desea jugar otra partida? (si o no):  ")
     if Devuelta == "si":
         main()
+    if Devuelta == "no":
+        print(f"Desea añadir mas fondos al banco? Actualmente tenes ${estado['banco']} en el banco")
+        respuesta_banco = input("Ingrese si o no: ")
+        if respuesta_banco == "si":
+            estado["banco"] += float(input("Ingrese monto a depositar en el banco: $"))
+            main()
+        else:
+            print("Gracias por jugar Snicker´s poker! Vuelva pronto!")
 
 
 
@@ -131,7 +141,7 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
         return "Carta alta"
 
 #Toma la cartas de la mesa y los jugadores para ver cual es la mas alta en caso de empate se usa esta funcion 
-def desempate(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta):
+def desempate(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta):
     todas_las_cartas_jugador = cartas_en_mesa + cartas_jugador
     todas_las_cartas_bot = cartas_en_mesa + cartas_bot
     carta_mayor_jugador = max(todas_las_cartas_jugador)
@@ -144,29 +154,28 @@ def desempate(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta):
         desempate=0
 
     if desempate == 1:
-        banco = banco + apuesta*2
-        return "            Gana el jugador por la carta mas alta"
+        estado["banco"] += apuesta*2
+        return f"            Gana el jugador Fondos restantes en el banco: $ {estado['banco']}"
     elif desempate == 2:
-        banco = banco - apuesta
-        return "            Gana el bot por la carta mas alta"
+        return f"            Gana el bot  Fondos restantes en el banco: $ {estado['banco']}"
     else:
-        return "            Empate por la carta mas alta", banco
+        estado["banco"] += apuesta
+        return f"            Empate por la carta mas alta Fondos restantes en el banco: $ {estado['banco']}"
     
 
 #Ponemos una lista del orden de clasificacion y segun las posiciones de ese orden va a dar si es mayor o menor q las otras
-def ganador(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta):
+def ganador(cartas_en_mesa, cartas_jugador, cartas_bot, estado,     apuesta):
     clasificacion_jugador = clasificacion_cartas(cartas_en_mesa, cartas_jugador)
     clasificacion_bot = clasificacion_cartas(cartas_en_mesa, cartas_bot)
 
     orden_clasificaciones = ["Carta alta", "Pareja", "Doble pareja", "Triple", "Escalera", "Color", "Full House", "Poker"]
     if orden_clasificaciones.index(clasificacion_jugador) > orden_clasificaciones.index(clasificacion_bot):
-        banco = banco + apuesta*2
-        return "            Gana el jugador"
+        estado["banco"] += apuesta*2 
+        return f"            Gana el jugador Fondos restantes en el banco: $ {estado['banco']}"
     elif orden_clasificaciones.index(clasificacion_jugador) < orden_clasificaciones.index(clasificacion_bot):
-        banco = banco - apuesta
-        return "            Gana el bot"
+        return f"            Gana el bot  Fondos restantes en el banco: $ {estado['banco']}"
     else:
-        return desempate(cartas_en_mesa, cartas_jugador, cartas_bot,banco,apuesta)
+        return desempate(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta)
 
 
 if arranque == "si":
