@@ -45,21 +45,30 @@ def main():
     print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta))
     print("---------------------------------------------------------------------" )
     print("---------------------------------------------------------------------" )
-    Devuelta=input("Desea jugar otra partida? (si o no):  ")
+    Devuelta = input("Desea jugar otra partida? (si o no):  ")
+
     if Devuelta == "si":
         main()
-    if Devuelta == "no":
+
+    elif Devuelta == "no":
         print(f"Desea añadir mas fondos al banco? Actualmente tenes ${estado['banco']} en el banco")
         respuesta_banco = input("Ingrese si o no: ")
+
         if respuesta_banco == "si":
-            estado["banco"] += float(input("Ingrese monto a depositar en el banco: $"))
-            main()
+            ok = False
+            while not ok:
+                try: 
+                    monto = float(input("Ingrese monto a depositar en el banco: $"))
+                    if monto > 0:
+                        estado["banco"] += monto
+                        ok = True
+                        main()
+                    else:
+                        print("El monto debe ser mayor a 0.")
+                except:
+                    print("Entrada inválida. Ingrese un número.")
         else:
             print("Gracias por jugar Snicker´s poker! Vuelva pronto!")
-
-
-
-
 
 
         
