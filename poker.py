@@ -68,7 +68,7 @@ def main():
                     print("Entrada inválida. Ingrese un número.")
         else:
             print("Gracias por jugar Snicker´s poker! Vuelva pronto!")
-
+#Funcion para cargar la apuesta hasta q sea valida
 def cargar_apuesta (estado):
     while True:
         try:
