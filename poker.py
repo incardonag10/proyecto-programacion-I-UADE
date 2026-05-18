@@ -9,13 +9,7 @@ while True:
             print("Entrada inválida. Ingrese si o no.")
 
 def main():
-    apuesta = float(input("Elija monto a apostar: $"))
-    while apuesta > estado["banco"]:
-        print(f"No hay fondos suficientes, tenes ${estado['banco']} en el banco")
-        apuesta = float(input("Elija monto a apostar: $"))
-    estado["banco"] -= apuesta
-
-
+    apuesta = cargar_apuesta(estado)
     cartas = generar_cartas()
     cartas_jugador = repartir_cartas(cartas, 2)
     cartas_en_mesa = cartas_en_la_mesa(cartas)
@@ -74,6 +68,20 @@ def main():
                     print("Entrada inválida. Ingrese un número.")
         else:
             print("Gracias por jugar Snicker´s poker! Vuelva pronto!")
+
+def cargar_apuesta (estado):
+    while True:
+        try:
+            apuesta = float(input("Elija monto a apostar: $"))
+            while apuesta > estado["banco"]:
+                print(f"No hay fondos suficientes, tenes ${estado['banco']} en el banco")
+                apuesta = float(input("Elija monto a apostar: $"))
+            estado["banco"] -= apuesta
+            return apuesta
+        except:
+            print("Entrada inválida. Ingrese un número.")
+        else:            return apuesta
+
 
 
         
