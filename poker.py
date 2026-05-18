@@ -1,9 +1,12 @@
 import random
 
 estado = {"banco": float(input("Ingrese monto a depositar en el banco: $"))}
-
-
-arranque = input("Desea jugar Snicker´s poker? (si o no): ")
+while True:
+        arranque = input("Desea jugar Snicker´s poker? (si o no): ")
+        if arranque == "si" or arranque =="no":
+            break
+        else:
+            print("Entrada inválida. Ingrese si o no.")
 
 def main():
     apuesta = float(input("Elija monto a apostar: $"))
@@ -45,7 +48,9 @@ def main():
     print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta))
     print("---------------------------------------------------------------------" )
     print("---------------------------------------------------------------------" )
+
     Devuelta = input("Desea jugar otra partida? (si o no):  ")
+
 
     if Devuelta == "si":
         main()
