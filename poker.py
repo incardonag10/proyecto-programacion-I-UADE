@@ -3,7 +3,7 @@ import random
 estado = {"banco": float(input("Ingrese monto a depositar en el banco: $"))}
 while True:
         arranque = input("Desea jugar Snicker´s poker? (si o no): ")
-        if arranque == "si" or arranque =="no":
+        if arranque.lower() == "si" or arranque.lower() == "no":
             break
         else:
             print("Entrada inválida. Ingrese si o no.")
@@ -22,10 +22,10 @@ def main():
     mostrar_cartas(cartas_en_mesa)
 
     apuesta2 = input("Desea apostar mas? (si o no): ")
-    while apuesta2 != "si" and apuesta2 != "no":
+    while apuesta2.lower() != "si" and apuesta2.lower() != "no":
         print("Entrada inválida. Ingrese si o no.")
         apuesta2 = input("Desea apostar mas? (si o no): ")
-    if apuesta2 == "si":
+    if apuesta2.lower() == "si":
         apuesta_extra = cargar_apuesta(estado)
         apuesta += apuesta_extra
 
@@ -37,10 +37,10 @@ def main():
     mostrar_cartas(cartas_en_mesa)
 
     apuesta3 = input("Desea apostar mas? (si o no): ")
-    while apuesta3 != "si" and apuesta3 != "no":
+    while apuesta3.lower() != "si" and apuesta3.lower() != "no":
         print("Entrada inválida. Ingrese si o no.")
         apuesta3 = input("Desea apostar mas? (si o no): ")
-    if apuesta3 == "si":
+    if apuesta3.lower() == "si":
         apuesta_extra1 = cargar_apuesta(estado)
         apuesta += apuesta_extra1
         
@@ -55,10 +55,10 @@ def main():
 
 
     apuesta4 = input("Desea apostar mas? (si o no): ")
-    while apuesta4 != "si" and apuesta4 != "no":
+    while apuesta4.lower() != "si" and apuesta4.lower() != "no":
         print("Entrada inválida. Ingrese si o no.")
         apuesta4 = input("Desea apostar mas? (si o no): ")
-    if apuesta4 == "si":
+    if apuesta4.lower() == "si":
         apuesta_extra2 = cargar_apuesta(estado)
         apuesta += apuesta_extra2
         
@@ -77,14 +77,14 @@ def main():
     Devuelta = input("Desea jugar otra partida? (si o no):  ")
 
 
-    if Devuelta == "si":
+    if Devuelta.lower() == "si":
         main()
 
-    elif Devuelta == "no":
+    elif Devuelta.lower() == "no":
         print(f"Desea añadir mas fondos al banco? Actualmente tenes ${estado['banco']} en el banco")
         respuesta_banco = input("Ingrese si o no: ")
 
-        if respuesta_banco == "si":
+        if respuesta_banco.lower() == "si":
             ok = False
             while not ok:
                 try: 
