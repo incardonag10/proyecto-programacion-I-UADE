@@ -16,8 +16,10 @@ def main():
     cartas_bot = repartir_cartas(cartas, 2)
 
     print("---------------------------------------------------------------------" )
-    print(f"            Cartas del jugador: {cartas_jugador}")
-    print(f"            Mesa inicial: {cartas_en_mesa}")
+    print("         Cartas del jugador:")
+    mostrar_cartas(cartas_jugador)
+    print("\nMesa inicial:")
+    mostrar_cartas(cartas_en_mesa)
 
     apuesta2 = input("Desea apostar mas? (si o no): ")
     while apuesta2 != "si" and apuesta2 != "no":
@@ -31,7 +33,8 @@ def main():
 
     print("---------------------------------------------------------------------" )
     cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
-    print(f"            Mesa ronda 1: {cartas_en_mesa}")
+    print("         Mesa ronda 1:")
+    mostrar_cartas(cartas_en_mesa)
 
     apuesta3 = input("Desea apostar mas? (si o no): ")
     while apuesta3 != "si" and apuesta3 != "no":
@@ -45,7 +48,8 @@ def main():
 
     print("---------------------------------------------------------------------" )
     cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
-    print(f"            Mesa ronda 2: {cartas_en_mesa}")
+    print("         Mesa ronda 2:")
+    mostrar_cartas(cartas_en_mesa)
 
     print("---------------------------------------------------------------------" )
 
@@ -59,7 +63,8 @@ def main():
         apuesta += apuesta_extra2
         
 
-    print(f"El otro jugador tira sus cartas y tiene:\n\n{cartas_bot}")
+    print("\nEl otro jugador tira sus cartas y tiene:\n")
+    mostrar_cartas(cartas_bot)
     print("---------------------------------------------------------------------" )
     print(f"            Clasificacion rival: {clasificacion_cartas(cartas_en_mesa, cartas_bot)}")
     print("---------------------------------------------------------------------" )
@@ -210,6 +215,45 @@ def desempate(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta):
         estado["banco"] += apuesta
         return f"            Empate por la carta mas alta Fondos restantes en el banco: $ {estado['banco']}"
     
+
+#asigna cada simbolo escirto a el simbolo en si
+def simbolo_palo(palo):
+    simbolos = {
+        "corazones": "♥",
+        "diamantes": "♦",
+        "treboles": "♣",
+        "picas": "♠"
+    }
+    return simbolos[palo]
+
+#pone la carta en forma de carta
+def mostrar_carta(carta):
+
+    valor, palo = carta
+    simbolo = simbolo_palo(palo)
+
+    return [
+        "┌─────┐",
+        f"│{valor:<2}   │",
+        f"│  {simbolo}  │",
+        f"│   {valor:>2}│",
+        "└─────┘"
+    ]
+
+#hace q las cartas esten bien mostradas al mismo tiempo y que no esten mezcladas entre si
+def mostrar_cartas(cartas):
+
+    cartas_dibujadas = [mostrar_carta(carta) for carta in cartas]
+
+    for linea in range(5):
+
+        fila = ""
+
+        for carta in cartas_dibujadas:
+            fila += carta[linea] + "  "
+
+        print(fila)
+
 
 #Ponemos una lista del orden de clasificacion y segun las posiciones de ese orden va a dar si es mayor o menor q las otras
 def ganador(cartas_en_mesa, cartas_jugador, cartas_bot, estado,     apuesta):
