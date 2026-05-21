@@ -72,8 +72,8 @@ def main():
     print("---------------------------------------------------------------------" )
     print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta))
     print("---------------------------------------------------------------------" )
-    print("---------------------------------------------------------------------" )
 
+    
     Devuelta = input("Desea jugar otra partida? (si o no):  ")
 
 
