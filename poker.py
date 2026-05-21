@@ -19,12 +19,28 @@ def main():
     print(f"            Cartas del jugador: {cartas_jugador}")
     print(f"            Mesa inicial: {cartas_en_mesa}")
 
+    apuesta2 = input("Desea apostar mas? (si o no): ")
+    while apuesta2 != "si" and apuesta2 != "no":
+        print("Entrada inválida. Ingrese si o no.")
+        apuesta2 = input("Desea apostar mas? (si o no): ")
+    if apuesta2 == "si":
+        apuesta_extra = cargar_apuesta(estado)
+        apuesta += apuesta_extra
+
 
 
     print("---------------------------------------------------------------------" )
     cartas_en_la_mesa_ronda(cartas, cartas_en_mesa)
     print(f"            Mesa ronda 1: {cartas_en_mesa}")
 
+    apuesta3 = input("Desea apostar mas? (si o no): ")
+    while apuesta3 != "si" and apuesta3 != "no":
+        print("Entrada inválida. Ingrese si o no.")
+        apuesta3 = input("Desea apostar mas? (si o no): ")
+    if apuesta3 == "si":
+        apuesta_extra1 = cargar_apuesta(estado)
+        apuesta += apuesta_extra1
+        
 
 
     print("---------------------------------------------------------------------" )
@@ -32,6 +48,16 @@ def main():
     print(f"            Mesa ronda 2: {cartas_en_mesa}")
 
     print("---------------------------------------------------------------------" )
+
+
+    apuesta4 = input("Desea apostar mas? (si o no): ")
+    while apuesta4 != "si" and apuesta4 != "no":
+        print("Entrada inválida. Ingrese si o no.")
+        apuesta4 = input("Desea apostar mas? (si o no): ")
+    if apuesta4 == "si":
+        apuesta_extra2 = cargar_apuesta(estado)
+        apuesta += apuesta_extra2
+        
 
     print(f"El otro jugador tira sus cartas y tiene:\n\n{cartas_bot}")
     print("---------------------------------------------------------------------" )
