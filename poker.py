@@ -73,7 +73,7 @@ def main():
     print(ganador(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta))
     print("---------------------------------------------------------------------" )
 
-    
+
     Devuelta = input("Desea jugar otra partida? (si o no):  ")
 
 
@@ -140,19 +140,21 @@ def cartas_en_la_mesa_ronda(cartas, cartas_en_mesa):
 
 #pone el orden de las cartas y dependiendo de cuantas veces se repite cada valor y/o cada palo se clasifica
 def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
-    todas_cartas_jugador = cartas_en_mesa + cartas_jugador
-    valores = [carta[0] for carta in todas_cartas_jugador]
-    palos = [carta[1] for carta in todas_cartas_jugador]
-    orden = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    todas_cartas = cartas_en_mesa + cartas_jugador
+    valores = [carta[0] for carta in todas_cartas]
+    palos = [carta[1] for carta in todas_cartas]
+
+    orden = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 
     max_rep = 0
     segunda_rep = 0
+
     for valor in valores:
         rep = valores.count(valor)
         if rep > max_rep:
             segunda_rep = max_rep
             max_rep = rep
-        elif rep != max_rep and rep > segunda_rep:
+        elif rep > segunda_rep and rep != max_rep:
             segunda_rep = rep
 
     es_color = False
@@ -160,22 +162,35 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
         if palos.count(palo) >= 5:
             es_color = True
 
-    es_escalera = False
-    todas_cartas_jugador_ordenadas = []
-    for carta in orden:
-        if carta in valores:
-            todas_cartas_jugador_ordenadas.append(carta)
+    valores_unicos = []
+    for i in valores:
+        if i in orden and i not in valores_unicos:
+            valores_unicos.append(i)
+
+    valores_unicos.sort(key=lambda x: orden.index(x))
+
     consecutivos = 1
-    for i in range(len(todas_cartas_jugador_ordenadas) - 1):
-        if orden.index(todas_cartas_jugador_ordenadas[i+1]) - orden.index(todas_cartas_jugador_ordenadas[i]) == 1:
+    es_escalera = False
+
+    for i in range(len(valores_unicos) - 1):
+        if orden.index(valores_unicos[i+1]) - orden.index(valores_unicos[i]) == 1:
             consecutivos += 1
             if consecutivos >= 5:
                 es_escalera = True
         else:
             consecutivos = 1
-            es_escalera = False
+    
 
- 
+    pares = 0
+    vistos = []
+
+    for i in valores:
+        if i not in vistos:
+            if valores.count(i) == 2:
+                pares += 1
+            vistos.append(i)
+
+
     if max_rep == 4:
         return "Poker"
     elif max_rep == 3 and segunda_rep == 2:
@@ -186,13 +201,14 @@ def clasificacion_cartas(cartas_en_mesa, cartas_jugador):
         return "Escalera"
     elif max_rep == 3:
         return "Triple"
-    elif max_rep == 2 and segunda_rep == 2:
+    elif pares == 2:
         return "Doble pareja"
-    elif max_rep == 2:
+    elif pares == 1:
         return "Pareja"
     else:
         return "Carta alta"
-
+    
+    
 #Toma la cartas de la mesa y los jugadores para ver cual es la mas alta en caso de empate se usa esta funcion 
 def desempate(cartas_en_mesa, cartas_jugador, cartas_bot,estado,apuesta):
     todas_las_cartas_jugador = cartas_en_mesa + cartas_jugador
