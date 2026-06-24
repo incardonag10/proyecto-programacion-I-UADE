@@ -81,25 +81,7 @@ def jugar_poker(nombre,apellido,banco):
         if Devuelta.lower() == "si":
             main()
 
-        elif Devuelta.lower() == "no":
-            print(f"Desea añadir mas fondos al banco? Actualmente tenes ${banco} en el banco")
-            respuesta_banco = input("Ingrese si o no: ")
 
-            if respuesta_banco.lower() == "si":
-                ok = False
-                while not ok:
-                    try: 
-                        monto = float(input("Ingrese monto a depositar en el banco: $"))
-                        if monto > 0:
-                            banco += monto
-                            ok = True
-                            main()
-                        else:
-                            print("El monto debe ser mayor a 0.")
-                    except:
-                        print("Entrada inválida. Ingrese un número.")
-            else:
-                print("Gracias por jugar Snicker´s poker! Vuelva pronto!")
     #Funcion para cargar la apuesta hasta q sea valida
     def cargar_apuesta ():
         nonlocal banco
