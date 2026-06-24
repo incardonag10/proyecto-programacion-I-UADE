@@ -2,7 +2,15 @@ def jugar_poker(nombre,apellido,banco):
     import random
 
     while True:
-            arranque = input("Desea jugar Snicker´s poker? (si o no): ")
+            print()
+            print("========================================")
+            print("                 POKER                  ")
+            print("========================================")
+            print()
+            print(f"Bienvenido a POKER, {nombre} {apellido}")
+            print(f"Fondos: ${banco}")
+            print()
+            arranque = input("Desea jugar? (si o no): ")
             if arranque.lower() == "si" or arranque.lower() == "no":
                 break
             else:
