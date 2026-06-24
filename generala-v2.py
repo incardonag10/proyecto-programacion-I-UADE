@@ -98,21 +98,28 @@ def calcular_puntaje(categoria, dados, servida=False):
 
 def detectar_combo_servido(dados):
     """
-    Usa conjuntos para detectar si los dados forman una combinación
-    especial en la primera tirada.
+    Detecta si los dados forman una combinación especial
+    en la primera tirada.
     """
-    conteo = {i: dados.count(i) for i in range(1, 7)}
-    valores_set = set(dados)                         
-    escaleras = [{1,2,3,4,5}, {2,3,4,5,6}, {1,3,4,5,6}]  
 
-    if any(v == 5 for v in conteo.values()):
+    conteo = {i: dados.count(i) for i in range(1, 7)}
+    valores_set = set(dados)
+    escaleras = [{1, 2, 3, 4, 5}, {2, 3, 4, 5, 6}, {1, 3, 4, 5, 6}]
+
+    max_repetidos = max(conteo.values())
+
+    if max_repetidos == 5:
         return "¡GENERALA SERVIDA!"
-    if any(v >= 4 for v in conteo.values()):
+
+    if max_repetidos >= 4:
         return "¡POKER SERVIDO!"
+
     if 3 in conteo.values() and 2 in conteo.values():
         return "¡FULL SERVIDO!"
-    if valores_set in escaleras:                          
+
+    if valores_set in escaleras:
         return "¡ESCALERA SERVIDA!"
+
     return None
 
 # ---------------------------------------------
@@ -135,7 +142,7 @@ def turno_jugador(marcador):
             combo = detectar_combo_servido(dados)
 
             if combo:
-                print(f"   {combo}")
+                print(f"{combo}")
 
                 cat_map = {                               
                     "¡GENERALA SERVIDA!": "Generala",
@@ -165,7 +172,7 @@ def turno_jugador(marcador):
 
         servida = False
 
-        # Pedir dados a guardar con confirmación (TP5: manejo de excepciones en pedir_categoria)
+        # pedir dados a guardar con confirmación
         while True:
             print("  ¿Cuáles guardás?\n")
             guardar = []
@@ -199,7 +206,6 @@ def turno_jugador(marcador):
         if len(guardar) == 5:
             break
 
-    # Mostrar categorías usando filter (TP4)
     print("Categorías disponibles:")
     disponibles = categorias_disponibles(marcador)
     for i, cat in enumerate(disponibles, 1):
