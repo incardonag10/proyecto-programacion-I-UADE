@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import os
 
 from blackjack import jugar_blackjack
 from generala import jugar_generala
 from poker import jugar_poker
+=======
+from blackjack import jugar_blackjack
+
+>>>>>>> ruleta
 from ruleta import jugar_ruleta
 
 
@@ -75,6 +80,7 @@ def registrar_jugador():
         return None, None, None
 
     print("Registro exitoso")
+<<<<<<< HEAD
     print("Bienvenido", nombre, apellido)    
     
     archivo = open("jugadores.txt", "a")
@@ -88,6 +94,9 @@ def registrar_jugador():
 
 
 
+=======
+    print("Bienvenido", nombre, apellido)
+>>>>>>> ruleta
 
     return nombre, apellido, edad
 def menu():
@@ -128,6 +137,7 @@ def menu():
 
             elif opcion == "0":
                 print("Gracias por jugar!")
+<<<<<<< HEAD
                 archivo = open("jugadores.txt", "a")
 
                 archivo.write("Nombre: " + nombre +
@@ -136,6 +146,8 @@ def menu():
                                 " | Saldo Final: " + str(saldo) + "\n")
 
                 archivo.close()
+=======
+>>>>>>> ruleta
                 break
 
             else:
