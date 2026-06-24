@@ -1,5 +1,5 @@
 import random
-
+#arreglar sumatoria
 #funciones
 
 def obtener_color(numero):
@@ -82,35 +82,35 @@ def calcular_ganancia(opcion, eleccion, numero, color, apuesta):
 
     elif opcion == 2:
         if eleccion == color:
-            return apuesta
+            return apuesta * 2
 
     elif opcion == 3 and numero != 0:
         if eleccion == "par" and numero % 2 == 0:
-            return apuesta
+            return apuesta * 2
         elif eleccion == "impar" and numero % 2 != 0:
-            return apuesta
+            return apuesta * 2
 
     elif opcion == 4:
         if eleccion == "bajo" and 1 <= numero <= 18:
-            return apuesta
+            return apuesta * 2
         elif eleccion == "alto" and 19 <= numero <= 36:
-            return apuesta
+            return apuesta * 2
 
     elif opcion == 5:
         if eleccion == 1 and 1 <= numero <= 12:
-            return apuesta * 2
+            return apuesta * 3
         elif eleccion == 2 and 13 <= numero <= 24:
-            return apuesta * 2
+            return apuesta * 3
         elif eleccion == 3 and 25 <= numero <= 36:
-            return apuesta * 2
+            return apuesta * 3
 
     elif opcion == 6 and numero != 0:
         if eleccion == 1 and numero % 3 == 1:
-            return apuesta * 2
+            return apuesta * 3
         elif eleccion == 2 and numero % 3 == 2:
-            return apuesta * 2
+            return apuesta * 3
         elif eleccion == 3 and numero % 3 == 0:
-            return apuesta * 2
+            return apuesta * 3
 
     return 0
 

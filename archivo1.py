@@ -1,11 +1,11 @@
 import os
 
 from blackjack import jugar_blackjack
-from generala import jugar_generala
+"""from generala import jugar_generala"""
 from poker import jugar_poker
 from ruleta import jugar_ruleta
 
-
+#arreglar pide nombre y apellido, dos veces primerio para el archivo luego para el menu
 
 def registrar_jugador():
     
@@ -121,7 +121,7 @@ def menu():
                 saldo = jugar_blackjack (nombre, apellido, saldo)
 
             elif opcion == "3":
-                saldo = jugar_generala (nombre, apellido, saldo)
+                saldo = """jugar_generala (nombre, apellido, saldo)"""
 
             elif opcion == "4":
                 saldo = jugar_poker (nombre, apellido, saldo)

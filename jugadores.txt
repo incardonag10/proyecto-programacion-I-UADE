@@ -1,0 +1,4 @@
+Nombre: Gabriel | Apellido: Ares | Edad: 18 | Saldo: 1000
+Nombre: Gabriel | Apellido: Ares | Edad: 18 | Saldo: 1000
+Nombre: A | Apellido: A | Edad: 18 | Saldo: 1000
+Nombre: Gabriel | Apellido: Ares | Edad: 18 | Saldo: 1000
