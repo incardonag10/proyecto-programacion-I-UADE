@@ -1,7 +1,6 @@
-def jugar_poker():
+def jugar_poker(nombre,apellido,estado):
     import random
 
-    estado = {"banco": float(input("Ingrese monto a depositar en el banco: $"))}
     while True:
             arranque = input("Desea jugar Snicker´s poker? (si o no): ")
             if arranque.lower() == "si" or arranque.lower() == "no":
@@ -289,6 +288,9 @@ def jugar_poker():
 
     if arranque == "si":
         main()
+    
+    return estado["banco"]
+    
 
 
 if __name__ == "__main__":
