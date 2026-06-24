@@ -1,4 +1,4 @@
-def jugar_poker(nombre,apellido,estado):
+def jugar_poker(nombre,apellido ,estado):
     import random
 
     while True:
