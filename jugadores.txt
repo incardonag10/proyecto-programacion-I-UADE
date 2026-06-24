@@ -1,1 +1,2 @@
 Nombre: Gabriel | Apellido: Ares | Edad: 18 | Saldo: 750
+Nombre: Gio | Apellido: Incardona | Edad: 19 | Saldo: 700

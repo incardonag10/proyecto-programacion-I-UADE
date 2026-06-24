@@ -283,7 +283,7 @@ def jugar_poker(nombre,apellido,banco):
     if arranque == "si":
         main()
     
-    return banco
+    return int(banco)
     
 
 

@@ -440,7 +440,7 @@ def jugargenerala(nombre, apellido, saldo):
     respuesta = input("Presione ENTER para jugar o 0 para volver al menu: ")
 
     if respuesta == "0":
-        return saldo
+        return int(saldo)
 
     apuesta = pedir_apuesta(saldo)
 
@@ -517,7 +517,7 @@ Si no tenés la combinación quedará en 0.
             return jugargenerala(nombre, apellido, saldo)
 
         elif respuesta == "0":
-            return saldo
+            return int(saldo)
 
         else:
             print("Opcion invalida")
