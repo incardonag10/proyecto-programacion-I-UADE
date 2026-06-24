@@ -1,12 +1,6 @@
 import random
-import time
-import os
 
-# funciones
-
-def limpiar_pantalla():
-    os.system("cls" if os.name == "nt" else "clear")
-
+#funciones
 
 def obtener_color(numero):
     if numero == 0:
@@ -19,7 +13,7 @@ def obtener_color(numero):
 
 def girar_ruleta():
     print("\nGirando la ruleta...")
-    time.sleep(1)
+    
 
     numero = random.randint(0, 36)
     color = obtener_color(numero)
@@ -122,11 +116,10 @@ def calcular_ganancia(opcion, eleccion, numero, color, apuesta):
     return 0
 
 
-# programa
+#programa
 
 def jugar_ruleta(nombre, apellido, saldo):
     while saldo > 0:
-        limpiar_pantalla()
         print("== RULETA ==")
         print(f"Jugador: {nombre} {apellido}")
         print(f"Saldo: {saldo}")
@@ -141,52 +134,52 @@ def jugar_ruleta(nombre, apellido, saldo):
                 opcion = int(input("\nElegí una opción (0 para girar, 9 para salir): "))
             except ValueError:
                 print("Error: Ingresá un número válido")
-                time.sleep(1.5)
+                
                 continue
 
             if opcion == 9:
                 print("Volviendo al menú principal...")
-                time.sleep(1)
+                
                 return saldo
 
             if opcion == 0:
                 if len(apuestas) == 0:
                     print("Primero tenés que hacer al menos una apuesta")
-                    time.sleep(1.5)
+                    
                     continue
                 break
 
             if opcion not in [1, 2, 3, 4, 5, 6]:
                 print("Error: Opción inválida")
-                time.sleep(1.5)
+                
                 continue
 
             try:
                 apuesta = int(input("¿Cuánto querés apostar?: "))
             except ValueError:
                 print("Error: ingresá un monto válido")
-                time.sleep(1.5)
+                
                 continue
 
             if apuesta <= 0:
                 print("Apuesta inválida")
-                time.sleep(1.5)
+                
                 continue
 
             if total_apostado + apuesta > saldo:
                 print("No tenés saldo suficiente para esa apuesta")
-                time.sleep(1.5)
+                
                 continue
 
             try:
                 eleccion = pedir_eleccion(opcion)
             except ValueError:
                 print("Error: ingresá valores válidos")
-                time.sleep(1.5)
+                
                 continue
 
             if eleccion is None:
-                time.sleep(1.5)
+                
                 continue
 
             apuestas.append([opcion, apuesta, eleccion])
@@ -195,7 +188,7 @@ def jugar_ruleta(nombre, apellido, saldo):
             print("\nApuesta agregada correctamente")
             print(f"Total apostado en esta ronda: {total_apostado}")
             print(f"Saldo disponible restante: {saldo - total_apostado}")
-            time.sleep(1.5)
+            
 
         numero, color = girar_ruleta()
         print(f"\nSalió: {numero} ({color})")
@@ -223,10 +216,9 @@ def jugar_ruleta(nombre, apellido, saldo):
 
         input("\nPresioná ENTER para continuar...")
 
-    limpiar_pantalla()
-    print("=" * 40)
-    print(" FIN DEL JUEGO ".center(40))
-    print("=" * 40)
+    print("========================================")
+    print("            FIN DEL JUEGO               ")
+    print("========================================")
     print(f"\nSaldo final: {saldo}")
     print("\nTe quedaste sin dinero.")
     print("\nGracias por jugar a la ruleta!")
@@ -236,7 +228,7 @@ def jugar_ruleta(nombre, apellido, saldo):
     return saldo
 
 
-# ejecucion
+#ejecucion
 
 if __name__ == "__main__":
     jugar_ruleta("Invitado", "Local", 1000)
