@@ -20,7 +20,7 @@ def registrar_jugador():
         nombre = input("Ingrese su nombre: ")
 
         if nombre == "":
-            print("El nombre no puede estar vacío")
+            print("El nombre no puede estar vacio")
             errores += 1
 
         elif " " in nombre:
@@ -37,7 +37,7 @@ def registrar_jugador():
         apellido = input("Ingrese su apellido: ")
 
         if apellido == "":
-            print("El apellido no puede estar vacío")
+            print("El apellido no puede estar vacio")
             errores += 1
 
         elif " " in apellido:
@@ -55,7 +55,7 @@ def registrar_jugador():
             edad = int(input("Ingrese su edad: "))
 
             if edad <= 0:
-                print("Edad inválida")
+                print("Edad invalida")
                 errores += 1
 
             elif edad < 18:
@@ -66,7 +66,7 @@ def registrar_jugador():
                 break
 
         except ValueError:
-            print("Edad inválida")
+            print("Edad invalida")
             errores += 1
 
 
@@ -112,7 +112,7 @@ def menu():
             print("4. Poker")
             print("0. Salir")
 
-            opcion = input("Elegí una opción: ")
+            opcion = input("Elegi una opción: ")
 
             if opcion == "1":
                 saldo = jugar_ruleta (nombre, apellido, saldo)
@@ -139,7 +139,7 @@ def menu():
                 break
 
             else:
-                print("Opción inválida")
+                print("Opcion invalida")
                 input("Presioná ENTER para continuar...")
 
 if __name__ == "__main__":
