@@ -289,3 +289,7 @@ def jugar_poker():
 
     if arranque == "si":
         main()
+
+
+if __name__ == "__main__":
+    jugar_poker()
