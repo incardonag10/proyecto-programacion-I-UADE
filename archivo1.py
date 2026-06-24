@@ -9,8 +9,9 @@ from ruleta import jugar_ruleta
 def registrar_jugador():
 
     print("======================================")
-    print("        REGISTRO DEL CASINO           ")
+    print("           LOGIN DEL CASINO           ")
     print("======================================")
+    print()
 
     errores = 0
 
@@ -113,6 +114,7 @@ def registrar_jugador():
 
     else:
 
+        print()
         print("Bienvenido nuevamente", nombre, apellido)
 
     return nombre, apellido, edad, saldo
@@ -126,10 +128,11 @@ def menu():
 
         while True:
 
+            print()
             print("========================================")
             print("                CASINO                  ")
             print("========================================")
-
+            print()
             print(f"Jugador: {nombre} {apellido}")
             print(f"Edad: {edad}")
             print(f"Saldo general: ${saldo}")
