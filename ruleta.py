@@ -13,7 +13,6 @@ def obtener_color(numero):
 
 def girar_ruleta():
     print("\nGirando la ruleta...")
-    
 
     numero = random.randint(0, 36)
     color = obtener_color(numero)
@@ -23,51 +22,51 @@ def girar_ruleta():
 
 def mostrar_menu():
     print("\n--- TIPOS DE APUESTA ---")
-    print("1. Número exacto (x36 si es 0, x35 resto)")
+    print("1. Numero exacto (x36 si es 0, x35 resto)")
     print("2. Color (rojo/negro) (x2)")
     print("3. Par / Impar (x2)")
     print("4. Bajo (1-18) / Alto (19-36) (x2)")
     print("5. Docenas (1-12 / 13-24 / 25-36) (x3)")
     print("6. Columnas (1 / 2 / 3) (x3)")
     print("0. Girar ruleta")
-    print("9. Volver al menú principal")
+    print("9. Volver al menu principal")
 
 
 def pedir_eleccion(opcion):
     if opcion == 1:
-        eleccion = int(input("Elegí un número (0-36): "))
+        eleccion = int(input("Elegi un numero (0-36): "))
         if eleccion < 0 or eleccion > 36:
-            print("Número inválido")
+            print("Numero invalido")
             return None
 
     elif opcion == 2:
-        eleccion = input("Elegí color (rojo/negro): ").lower()
+        eleccion = input("Elegi color (rojo/negro): ").lower()
         if eleccion not in ["rojo", "negro"]:
-            print("Color inválido")
+            print("Color invalido")
             return None
 
     elif opcion == 3:
-        eleccion = input("Elegí (par/impar): ").lower()
+        eleccion = input("Elegi (par/impar): ").lower()
         if eleccion not in ["par", "impar"]:
-            print("Opción inválida")
+            print("Opcion invalida")
             return None
 
     elif opcion == 4:
-        eleccion = input("Elegí (bajo/alto): ").lower()
+        eleccion = input("Elegi (bajo/alto): ").lower()
         if eleccion not in ["bajo", "alto"]:
-            print("Opción inválida")
+            print("Opcion invalida")
             return None
 
     elif opcion == 5:
-        eleccion = int(input("Elegí docena (1:1-12 / 2:13-24 / 3:25-36): "))
+        eleccion = int(input("Elegi docena (1:1-12 / 2:13-24 / 3:25-36): "))
         if eleccion not in [1, 2, 3]:
-            print("Docena inválida")
+            print("Docena invalida")
             return None
 
     elif opcion == 6:
-        eleccion = int(input("Elegí columna (1 / 2 / 3): "))
+        eleccion = int(input("Elegi columna (1 / 2 / 3): "))
         if eleccion not in [1, 2, 3]:
-            print("Columna inválida")
+            print("Columna invalida")
             return None
 
     return eleccion
@@ -131,55 +130,55 @@ def jugar_ruleta(nombre, apellido, saldo):
             mostrar_menu()
 
             try:
-                opcion = int(input("\nElegí una opción (0 para girar, 9 para salir): "))
+                opcion = int(input("\nElegi una opcion (0 para girar, 9 para salir): "))
             except ValueError:
-                print("Error: Ingresá un número válido")
-                
+                print("Error: Ingresa un numero valido")
+
                 continue
 
             if opcion == 9:
-                print("Volviendo al menú principal...")
-                
+                print("Volviendo al menu principal...")
+
                 return saldo
 
             if opcion == 0:
                 if len(apuestas) == 0:
-                    print("Primero tenés que hacer al menos una apuesta")
-                    
+                    print("Primero tenes que hacer al menos una apuesta")
+
                     continue
                 break
 
             if opcion not in [1, 2, 3, 4, 5, 6]:
-                print("Error: Opción inválida")
-                
+                print("Error: Opcion invalida")
+
                 continue
 
             try:
-                apuesta = int(input("¿Cuánto querés apostar?: "))
+                apuesta = int(input("¿Cuanto queres apostar?: "))
             except ValueError:
-                print("Error: ingresá un monto válido")
-                
+                print("Error: ingresa un monto valido")
+
                 continue
 
             if apuesta <= 0:
-                print("Apuesta inválida")
-                
+                print("Apuesta invalida")
+
                 continue
 
             if total_apostado + apuesta > saldo:
-                print("No tenés saldo suficiente para esa apuesta")
-                
+                print("No tenes saldo suficiente para esa apuesta")
+
                 continue
 
             try:
                 eleccion = pedir_eleccion(opcion)
             except ValueError:
-                print("Error: ingresá valores válidos")
-                
+                print("Error: ingresa valores validos")
+
                 continue
 
             if eleccion is None:
-                
+
                 continue
 
             apuestas.append([opcion, apuesta, eleccion])
@@ -188,10 +187,9 @@ def jugar_ruleta(nombre, apellido, saldo):
             print("\nApuesta agregada correctamente")
             print(f"Total apostado en esta ronda: {total_apostado}")
             print(f"Saldo disponible restante: {saldo - total_apostado}")
-            
 
         numero, color = girar_ruleta()
-        print(f"\nSalió: {numero} ({color})")
+        print(f"\nSalio: {numero} ({color})")
 
         ganancia_total = 0
 
@@ -214,7 +212,7 @@ def jugar_ruleta(nombre, apellido, saldo):
         print(f"Total ganado: {ganancia_total}")
         print(f"Saldo actual: {saldo}")
 
-        input("\nPresioná ENTER para continuar...")
+        input("\nPresiona ENTER para continuar...")
 
     print("========================================")
     print("            FIN DEL JUEGO               ")
@@ -223,7 +221,7 @@ def jugar_ruleta(nombre, apellido, saldo):
     print("\nTe quedaste sin dinero.")
     print("\nGracias por jugar a la ruleta!")
 
-    input("\nPresioná ENTER para volver al menú...")
+    input("\nPresiona ENTER para volver al menu...")
 
     return saldo
 
