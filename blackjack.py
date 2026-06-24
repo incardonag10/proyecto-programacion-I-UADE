@@ -23,22 +23,17 @@ def jugar_blackjack(nombre, apellido, banco):
         pos += 1
         return carta
     
-    print("#######################")
-    print("       BLACKJACK       ")
-    print("#######################")
+    print("===="*10)
+    print("BLACKJACK".center(40))
+    print("===="*10)
 
-    print(f"Bienvenido {nombre} {apellido} a Snicker´s blackjack")
-    arranque = input("Desea jugar? (si o no): ").lower()
-    blackjack = False
-    while arranque != "si" and arranque != "no":
-                print("Respuesta inválida. Ingrese solo si o no.")
-                arranque = input("Quiere jugar? (si o no): ").lower()
+    print(f"Bienvenido {nombre} {apellido}")
 
-    if arranque == "si":
-        blackjack = True
-        print("-----------------------")
-        print(f"Fondos: ${banco}")
-    #si no se dice "si" no va a arrancar el juego
+
+    blackjack = True
+    print("-----------------------")
+    print(f"Fondos: ${banco}")
+
 
     
     while blackjack:
