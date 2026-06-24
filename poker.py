@@ -1,5 +1,6 @@
-import random
 def jugar_poker():
+    import random
+
     estado = {"banco": float(input("Ingrese monto a depositar en el banco: $"))}
     while True:
             arranque = input("Desea jugar Snicker´s poker? (si o no): ")
@@ -15,7 +16,7 @@ def jugar_poker():
         cartas_en_mesa = cartas_en_la_mesa(cartas)
         cartas_bot = repartir_cartas(cartas, 2)
 
-        print("---------------------------------------------------------------------" )
+        print("--------------------------------------------------------------------" )
         print("         Cartas del jugador:")
         mostrar_cartas(cartas_jugador)
         print("\nMesa inicial:")
