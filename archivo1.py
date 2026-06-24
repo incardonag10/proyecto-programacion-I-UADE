@@ -5,14 +5,13 @@ from blackjack import jugar_blackjack
 from poker import jugar_poker
 from ruleta import jugar_ruleta
 
-#arreglar pide nombre y apellido, dos veces primerio para el archivo luego para el menu
 
 def registrar_jugador():
-    
+
     print("======================================")
     print("        REGISTRO DEL CASINO           ")
     print("======================================")
-  
+
     errores = 0
 
     while errores < 3:
@@ -31,7 +30,6 @@ def registrar_jugador():
             nombre = nombre.capitalize()
             break
 
-
     while errores < 3:
 
         apellido = input("Ingrese su apellido: ")
@@ -48,7 +46,6 @@ def registrar_jugador():
             apellido = apellido.capitalize()
             break
 
-
     while errores < 3:
 
         try:
@@ -60,7 +57,7 @@ def registrar_jugador():
 
             elif edad < 18:
                 print("Acceso denegado. Debe ser mayor de 18 años.")
-                return None, None, None
+                return None, None, None, None
 
             else:
                 break
@@ -69,35 +66,66 @@ def registrar_jugador():
             print("Edad invalida")
             errores += 1
 
-
     if errores == 3:
         print("Lo siento agoto los intentos. No puede jugar.")
-        return None, None, None
+        return None, None, None, None
 
-    print("Registro exitoso")
-    print("Bienvenido", nombre, apellido)    
-    
-    archivo = open("jugadores.txt", "a")
+    saldo = 1000
+    existe = False
+    lineas = []
 
-    archivo.write("Nombre: " + nombre +
-                  " | Apellido: " + apellido +
-                  " | Edad: " + str(edad) +
-                  " | Saldo: 1000\n")
+    if os.path.exists("jugadores.txt"):
 
-    archivo.close()
+        archivo = open("jugadores.txt", "r")
+
+        lineas = archivo.readlines()
+
+        archivo.close()
+
+        for linea in lineas:
+
+            datos = linea.strip().split(" | ")
+
+            nom = datos[0].split(": ")[1]
+            ape = datos[1].split(": ")[1]
+
+            if nom == nombre and ape == apellido:
+
+                edad = int(datos[2].split(": ")[1])
+                saldo = int(datos[3].split(": ")[1])
+
+                existe = True
+                break
+
+    if not existe:
+
+        archivo = open("jugadores.txt", "a")
+
+        archivo.write("Nombre: " + nombre +
+                      " | Apellido: " + apellido +
+                      " | Edad: " + str(edad) +
+                      " | Saldo: " + str(saldo) + "\n")
+
+        archivo.close()
+
+        print("Registro exitoso")
+        print("Bienvenido", nombre, apellido)
+
+    else:
+
+        print("Bienvenido nuevamente", nombre, apellido)
+
+    return nombre, apellido, edad, saldo
 
 
-
-
-    return nombre, apellido, edad
 def menu():
-    
-    nombre, apellido, edad = registrar_jugador()
 
-    if nombre != None and apellido != None and edad != None:
-        saldo = 1000
+    nombre, apellido, edad, saldo = registrar_jugador()
+
+    if nombre != None:
 
         while True:
+
             print("========================================")
             print("                CASINO                  ")
             print("========================================")
@@ -112,35 +140,60 @@ def menu():
             print("4. Poker")
             print("0. Salir")
 
-            opcion = input("Elegi una opción: ")
+            opcion = input("Elegi una opcion: ")
 
             if opcion == "1":
-                saldo = jugar_ruleta (nombre, apellido, saldo)
+                saldo = jugar_ruleta(nombre, apellido, saldo)
 
             elif opcion == "2":
-                saldo = jugar_blackjack (nombre, apellido, saldo)
+                saldo = jugar_blackjack(nombre, apellido, saldo)
 
             elif opcion == "3":
-                saldo = """jugar_generala (nombre, apellido, saldo)"""
+                saldo = """jugar_generala(nombre, apellido, saldo)"""
 
             elif opcion == "4":
-                saldo = jugar_poker (nombre, apellido, saldo)
+                saldo = jugar_poker(nombre, apellido, saldo)
 
             elif opcion == "0":
+
+                if os.path.exists("jugadores.txt"):
+
+                    archivo = open("jugadores.txt", "r")
+
+                    lineas = archivo.readlines()
+
+                    archivo.close()
+
+                    archivo = open("jugadores.txt", "w")
+
+                    for linea in lineas:
+
+                        datos = linea.strip().split(" | ")
+
+                        nom = datos[0].split(": ")[1]
+                        ape = datos[1].split(": ")[1]
+
+                        if nom == nombre and ape == apellido:
+
+                            archivo.write("Nombre: " + nombre +
+                                          " | Apellido: " + apellido +
+                                          " | Edad: " + str(edad) +
+                                          " | Saldo: " + str(saldo) + "\n")
+
+                        else:
+
+                            archivo.write(linea)
+
+                    archivo.close()
+
                 print("Gracias por jugar!")
-                archivo = open("jugadores.txt", "a")
-
-                archivo.write("Nombre: " + nombre +
-                                " | Apellido: " + apellido +
-                                " | Edad: " + str(edad) +
-                                " | Saldo Final: " + str(saldo) + "\n")
-
-                archivo.close()
                 break
 
             else:
+
                 print("Opcion invalida")
-                input("Presioná ENTER para continuar...")
+                input("Presiona ENTER para continuar...")
+
 
 if __name__ == "__main__":
     menu()
