@@ -23,14 +23,21 @@ def jugar_blackjack(nombre, apellido, banco):
         pos += 1
         return carta
     
+    print()
     print("===="*10)
     print("BLACKJACK".center(40))
     print("===="*10)
-
+    print()
 
     blackjack = True
-    print("-----------------------")
+    print("Bienvenido a BLACKJACK, ", nombre, apellido)
     print(f"Fondos: ${banco}")
+    print()
+
+    respuesta = input("ENTER para jugar o 0 para volver al menu: ")
+
+    if respuesta == "0":
+        return int(banco)
 
 
     while blackjack:
@@ -212,7 +219,7 @@ def jugar_blackjack(nombre, apellido, banco):
 
         if banco <= 0:
             print("\nSe ha quedado sin fondos")
-            print("GAME OVER")
+            print("Fin del juego")
             blackjack = False
         else:
             revancha = input("\nQuiere jugar otra ronda? (si o no): ").lower()
@@ -224,16 +231,13 @@ def jugar_blackjack(nombre, apellido, banco):
                 blackjack = False
                 print("Adios")
         print("-----------------------")
-    return banco
+    return int(banco)
 
-nombre = input("Ingrese su nombre: ")
-apellido = input("Ingrese su apellido: ")
 if __name__ == "__main__":
-    jugar_blackjack(nombre, apellido, saldo)
-print("codigo completo")
-            
-            
+    nombre = input("Ingrese su nombre: ")
+    apellido = input("Ingrese su apellido: ")
 
+    jugar_blackjack(nombre, apellido, saldo)
 
 
 

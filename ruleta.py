@@ -119,7 +119,11 @@ def calcular_ganancia(opcion, eleccion, numero, color, apuesta):
 
 def jugar_ruleta(nombre, apellido, saldo):
     while saldo > 0:
-        print("== RULETA ==")
+        print()
+        print("========================================")
+        print("                 RULETA                 ")
+        print("========================================")
+        print()
         print(f"Jugador: {nombre} {apellido}")
         print(f"Saldo: {saldo}")
 
