@@ -27,15 +27,12 @@ def jugar_blackjack(nombre, apellido, banco):
     print("BLACKJACK".center(40))
     print("===="*10)
 
-    print(f"Bienvenido {nombre} {apellido}")
-
 
     blackjack = True
     print("-----------------------")
     print(f"Fondos: ${banco}")
 
 
-    
     while blackjack:
         jugador_as = False
         blackjack_jugador = False
@@ -227,11 +224,19 @@ def jugar_blackjack(nombre, apellido, banco):
                 blackjack = False
                 print("Adios")
         print("-----------------------")
+    return banco
 
 nombre = input("Ingrese su nombre: ")
 apellido = input("Ingrese su apellido: ")
 if __name__ == "__main__":
     jugar_blackjack(nombre, apellido, saldo)
+print("codigo completo")
+            
+            
 
-            
-            
+
+
+
+
+
+
