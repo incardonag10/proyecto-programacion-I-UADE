@@ -192,10 +192,19 @@ def turno_jugador(marcador):
         print(f"tu tirada {num_tirada} de 3")
         print(f"tus dados son: {dados}")
 
+        if num_tirada == 1:
+            combo = detectar_combo_servido(dados)
+
+            if combo is not None:
+                print(f"te salio {combo}")
+
+                respuesta = pedir_si_no("queres anotar esta jugada servida ahora? (si/no): ")
+
+                if respuesta == "si":
+                    break
+
         if num_tirada == 3:
             break
-
-        servida = False
 
         while True:
             guardar = []
@@ -216,30 +225,33 @@ def turno_jugador(marcador):
                 break
 
         cantidad_nuevos = 5 - len(guardar)
+
+        if cantidad_nuevos == 0:
+            break
+
         nuevos = tirar_dados(cantidad_nuevos)
         dados = guardar + nuevos
+
+        servida = False
 
         print(f"dados guardados: {guardar}")
         print(f"dados nuevos: {nuevos}")
         print(f"dados finales: {dados}")
 
-        if len(guardar) == 5:
-            break
-    
-    print ("categorias disponibles: ")
+    print("categorias disponibles: ")
 
     disponibles = categorias_disponibles(marcador)
 
-    for i in range (len(disponibles)):
+    for i in range(len(disponibles)):
         categoria = disponibles[i]
-        puntaje = calcular_puntajes (categoria, dados, servida)
+        puntaje = calcular_puntajes(categoria, dados, servida)
 
-        print (f"{i+1}. {categoria} - {puntaje} puntos")
+        print(f"{i + 1}. {categoria} - {puntaje} puntos")
 
     categoria_elegida = pedir_categoria(disponibles)
-    puntaje = calcular_puntajes (categoria_elegida, dados, servida)
+    puntaje = calcular_puntajes(categoria_elegida, dados, servida)
 
-    if categoria_elegida == "doble generala":
+    if categoria_elegida == "Doble Generala":
         conteo = {}
 
         for numero in range(1, 7):
