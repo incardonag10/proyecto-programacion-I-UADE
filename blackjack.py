@@ -47,10 +47,15 @@ def jugar_blackjack(nombre, apellido, banco):
         casa_blackjack = False
         apuesta_as = False
         confir = False
-        apuesta = float(input("Elija monto a apostar: $"))
-        while apuesta <= 0 or apuesta > banco:
-            apuesta = int(input("Apuesta no valida, ingrese otra: $"))
-        
+        while True:
+            try:
+                apuesta = float(input("Elija monto a apostar: $"))
+                while apuesta <= 0 or apuesta > banco:
+                    apuesta = float(input("Apuesta no valida, ingrese otra: $"))
+                break
+            except ValueError:
+                print("Error, tipo de dato no valido")
+            
         carta_jugador_1 = sacar_carta()
         carta_casa_1 = sacar_carta()
         carta_jugador_2 = sacar_carta()
