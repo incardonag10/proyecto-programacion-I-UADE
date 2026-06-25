@@ -6,10 +6,9 @@ Dentro de nuestro repertorio se encuentran:
 - Blackjack
 - Poker
 - Generala
-- Truco
 
 Al momento de iniciar, el usuario deberá registrarse para poder acceder al juego.
-Cada nuevo usuario recibirá un saldo de $1000 USD en su banco ficticio dentro de nuestro “casino”, los cuales podrá usar para apostarlos en alguna de las 5 actividades. 
+Cada nuevo usuario recibirá un saldo de $1000 USD en su banco ficticio dentro de nuestro “casino”, los cuales podrá usar para apostarlos en alguna de las 4 actividades. 
 El dinero perdido o ganado modificará los fondos disponibles del jugador. 
 En el caso de que el jugador pierda todos sus fondos, la cuenta será eliminada y para seguir jugando no quedaría más opción más que crear otra cuenta nueva. 
 
