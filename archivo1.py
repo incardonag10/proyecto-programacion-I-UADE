@@ -8,6 +8,7 @@ from ruleta import jugar_ruleta
 
 def registrar_jugador():
 
+    print()
     print("======================================")
     print("           LOGIN DEL CASINO           ")
     print("======================================")
